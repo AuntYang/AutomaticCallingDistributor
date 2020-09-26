@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NLECloudSDK\NLECloudSDK.csproj" />
+    <ProjectReference Include="..\..\C#资料整理2020-7-2\CSharp-SDK-master\NLECloudSDK\NLECloudSDK.csproj" />
   </ItemGroup>
 
 </Project>
