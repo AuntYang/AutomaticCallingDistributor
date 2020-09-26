@@ -16,6 +16,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System.Windows.Threading;
 using CloudPlatformInfo;
+using NLECloudSDK;
+using System.Data;
 
 namespace 排队机
 {
@@ -25,6 +27,8 @@ namespace 排队机
     public partial class MainWindow : Window
     {
         LoginWindow loginWindow = new LoginWindow();
+        public SeriesCollection SeriesCollection { get; set; }
+        public List<string> Labels { get; set; }
         
         public MainWindow()
         {
@@ -40,14 +44,33 @@ namespace 排队机
             time = new DispatcherTimer();
             time.Interval = TimeSpan.FromSeconds(5000);
             time.Tick += time_tick;
+            time.Tick += livechart;
             time.Start();
 
         }
         void time_tick (object sender,EventArgs e)
         {
             NumberTheCurrent.Text =  MainBusiness.numberPeople().ToString();
-        }
 
+            
+          
+        }
+         void livechart(object sender , EventArgs e)
+        {
+            
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = new ChartValues<double> { 3, 5, 7, 4 }
+                },
+                new ColumnSeries
+                {
+                    Values = new ChartValues<decimal> {5,6,2,7}
+                }
+            };
+            DataContext = this;
+        }
         private void Button_Click_Began(object sender, RoutedEventArgs e)
         {//开始取号点击事件
             MainBusiness.Began();
