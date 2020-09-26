@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B6DD2C3-3322-469A-A272-FD744B05B7EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NLECloudSDK</RootNamespace>
+    <AssemblyName>NLECloudSDK</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\NLECloudSDKTest\sdk\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\NLECloudSDKTest\sdk\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ApplicationSettings.cs" />
+    <Compile Include="Common\HttpHelper.cs" />
+    <Compile Include="Common\HttpMethod.cs" />
+    <Compile Include="Common\HttpReqEntity.cs" />
+    <Compile Include="Common\HttpResEntity.cs" />
+    <Compile Include="Common\JsonFormatter.cs" />
+    <Compile Include="Common\RequestAPIHelper.cs" />
+    <Compile Include="Common\ResultMsg.cs" />
+    <Compile Include="Common\ResultStatus.cs" />
+    <Compile Include="Common\TimeoutTask.cs" />
+    <Compile Include="Model\AccountLoginDTO.cs" />
+    <Compile Include="Model\AccountLoginResultDTO.cs" />
+    <Compile Include="Model\ActuatorInfoDTO.cs" />
+    <Compile Include="Model\ApiPagingQueryBase.cs" />
+    <Compile Include="Model\CameraInfoDTO.cs" />
+    <Compile Include="Model\SensorDataFuzzyQryPagingParas.cs" />
+    <Compile Include="Model\SensorDataJuHeQryPagingParas.cs" />
+    <Compile Include="Model\SensorDataPointDTO.cs" />
+    <Compile Include="Model\DeviceAddUpdateDTO.cs" />
+    <Compile Include="Model\DeviceFuzzyQryPagingParas.cs" />
+    <Compile Include="Model\DeviceInfoDTO.cs" />
+    <Compile Include="Model\DeviceSensorDataDTO.cs" />
+    <Compile Include="Model\OnlineDataDTO.cs" />
+    <Compile Include="Model\ProjectFuzzyQryPagingParas.cs" />
+    <Compile Include="Model\SensorBaseInfoDTO.cs" />
+    <Compile Include="Model\SensorAddUpdateBase.cs" />
+    <Compile Include="Model\SensorDataDTO.cs" />
+    <Compile Include="Model\SensorDataInfoDTO.cs" />
+    <Compile Include="Model\SensorDataListAddDTO.cs" />
+    <Compile Include="Model\SensorInfoDTO.cs" />
+    <Compile Include="NLECloudAPIUrl.cs" />
+    <Compile Include="Pager\PagerParameters\LibPagerParameters.cs" />
+    <Compile Include="Pager\PagerSet\DataSetPagerSet.cs" />
+    <Compile Include="Pager\PagerSet\ListPagerSet.cs" />
+    <Compile Include="Pager\PagerSet\PagerSet.cs" />
+    <Compile Include="Model\ProjectInfoDTO.cs" />
+    <Compile Include="NLECloudAPI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enum\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
