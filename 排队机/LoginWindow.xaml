@@ -1,0 +1,28 @@
+﻿<Window x:Class="排队机.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:排队机"
+        mc:Ignorable="d"
+        Title="用户登录" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="266,77,0,0" TextWrapping="Wrap" Text="登录排队机系统" Height="54" VerticalAlignment="Top" Width="265" RenderTransformOrigin="0.5,0.5" FontSize="36">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.124"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBox Name="username" HorizontalAlignment="Left" Height="34" Margin="338,171,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191" FontSize="22"/>
+        <PasswordBox Name="password" Password="" HorizontalAlignment="Left" Height="34" Margin="338,238,0,0" VerticalAlignment="Top" Width="191" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="261,175,0,0" TextWrapping="Wrap" Text="账号" VerticalAlignment="Top" Height="34" FontSize="20" Width="41"/>
+        <TextBlock HorizontalAlignment="Left" Margin="261,242,0,0" TextWrapping="Wrap" Text="密码" VerticalAlignment="Top" Height="34" FontSize="20" Width="41"/>
+        <Button Name="button_login" Click="button_login_Click" Content="登录" HorizontalAlignment="Left" Margin="261,327,0,0" VerticalAlignment="Top" Width="268" Height="40" FontSize="24"/>
+
+
+    </Grid>
+</Window>
