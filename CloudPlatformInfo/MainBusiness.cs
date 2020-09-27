@@ -43,7 +43,14 @@ namespace CloudPlatformInfo
                 ApiTags = "number_up"
             };
             var yxh = SDK.GetSensorDatas(query, TempInfo.API_HOST);
-            return yxh.ResultObj.Count;
+            if(yxh.IsSuccess())
+            {
+                return yxh.ResultObj.Count;
+            }
+            else
+            {
+                return 0;
+            }
 
         }
     }

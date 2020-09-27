@@ -10,8 +10,8 @@ namespace CloudPlatformInfo
     public static class TempInfo
     {//存储登录后的accesstoken
         public static String API_HOST = "http://api.nlecloud.com";
-            //ApplicationSettings.Get("ApiHost");
-
+        //ApplicationSettings.Get("ApiHost");
+        public static int deviceid = 119374;//设备标识
         public static String Token;//登录成功后返回的Token
     }
 }
