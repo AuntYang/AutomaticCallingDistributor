@@ -37,6 +37,16 @@ namespace CloudPlatformInfo
         }
         public static int numberPeople()
         {//当前排队人数
+            var yxh = SDK.GetSensorInfo(119374, "number_up", TempInfo.API_HOST);
+            if(yxh.IsSuccess())
+            {
+                return (int) yxh.ResultObj.Value;
+            }
+            else
+            {
+                return 0;
+            }
+            /*
             SensorDataFuzzyQryPagingParas query = new SensorDataFuzzyQryPagingParas()
             {
                 DeviceID=119374,
@@ -51,7 +61,7 @@ namespace CloudPlatformInfo
             {
                 return 0;
             }
-
+            */
         }
     }
 }

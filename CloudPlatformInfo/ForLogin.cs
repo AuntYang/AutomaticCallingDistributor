@@ -24,7 +24,14 @@ namespace CloudPlatformInfo
             }
             return false;
         }
-
+        /*
+        public static bool Remeberme(AccountLoginDTO accountLoginDTO)
+        {
+            SDK = new NLECloudAPI(TempInfo.API_HOST);
+            var yxh = SDK.UserLogin(accountLoginDTO);
+               
+        }
+        */
         
     }
 }
