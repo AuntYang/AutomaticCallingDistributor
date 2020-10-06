@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:排队机"
         mc:Ignorable="d"
-        Title="用户登录" Height="450" Width="800">
+        Title="用户登录" Height="450" Width="800" Icon="NEKE BOX.png">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="569*"/>
+            <ColumnDefinition Width="225*"/>
+        </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="266,77,0,0" TextWrapping="Wrap" Text="登录排队机系统" Height="54" VerticalAlignment="Top" Width="265" RenderTransformOrigin="0.5,0.5" FontSize="36">
             <TextBlock.RenderTransform>
                 <TransformGroup>
@@ -17,7 +21,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBox Name="username" HorizontalAlignment="Left" Height="34" Margin="338,171,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191" FontSize="22"/>
+        <TextBox Name="username" HorizontalAlignment="Left" Height="34" Margin="338,171,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Top" Width="191" FontSize="22"/>
         <PasswordBox Name="password" Password="" HorizontalAlignment="Left" Height="34" Margin="338,238,0,0" VerticalAlignment="Top" Width="191" FontSize="22"/>
         <TextBlock HorizontalAlignment="Left" Margin="261,175,0,0" TextWrapping="Wrap" Text="账号" VerticalAlignment="Top" Height="34" FontSize="20" Width="41"/>
         <TextBlock HorizontalAlignment="Left" Margin="261,242,0,0" TextWrapping="Wrap" Text="密码" VerticalAlignment="Top" Height="34" FontSize="20" Width="41"/>

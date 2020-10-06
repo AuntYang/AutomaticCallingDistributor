@@ -29,10 +29,10 @@ namespace 排队机
     {
         #region -- 参数设置 --
         //LoginWindow loginWindow = new LoginWindow();
-        public SeriesCollection SeriesCollection {get; set;}
-        public List<string> Labels { get; set; }
-        private double trend;
-        private double[] temp = { 1, 3, 2, 4, 3, 5, 2, 1 };
+        public SeriesCollection SeriesCollection { get; set; }//折线图
+        public List<string> Labels { get; set; }//横坐标
+        private int[] temp = { 0, 0, 0, 0, 0, 0 ,0,0,0,0};
+
         #endregion
 
         #region -- 定时器 --
@@ -44,6 +44,7 @@ namespace 排队机
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//窗口出现在屏幕的位置
+            livechart();
         }
         DispatcherTimer time;//实例化一个定时器
         
@@ -53,8 +54,10 @@ namespace 排队机
             time.Interval = TimeSpan.FromSeconds(5);
             time.Tick += CurrentLineNumber;
             //time.Tick += livechart;
-            //time.Tick += linestart;
+            
+            time.Tick += linestart;
             time.Start();
+
 
         }
         #endregion
@@ -63,57 +66,46 @@ namespace 排队机
         void CurrentLineNumber(object sender,EventArgs e)
         {
             //计时刷新当前人数
-            if(MainBusiness.numberPeople()!=0)
+            if(MainBusiness.numberPeople()!= 00)
             {
                 NumberTheCurrent.Text =  MainBusiness.numberPeople().ToString();
+                
+               
             }
             else
             {
-                MessageBox.Show("设备"+TempInfo.deviceid+"不在线", "提示");
+                NumberTheCurrent.FontSize = 16;
+                NumberTheCurrent.Text = "暂无数据";
             }
-            
-            //及时刷新动态图表
         }
         #endregion
-
+        
         #region -- 动态图表 --
-        void livechart(object sender , RoutedEventArgs e)
-        {
-            LineSeries myllineseries = new LineSeries();//实例化一条折线图
-            myllineseries.Title = "人数";//设置折线的标题
-            myllineseries.LineSmoothness = 0;//设置折线图的直线形式
-            myllineseries.PointGeometry = null; //设置折线图的无点样式
-            Labels = new List<string>{ "1", "3", "2", "4", "-3", "5", "2", "1" };//添加横坐标
-            myllineseries.Values = new ChartValues<double>(temp);
-            SeriesCollection = new SeriesCollection{};
-            SeriesCollection.Add(myllineseries);
-            trend = 8;
-            linestart();
+        public void livechart()
+        {//创建折线图函数
+            LineSeries mylineseries = new LineSeries();
+            mylineseries.Title = "当前人数";
+            //mylineseries.LineSmoothness = 0;//折线图直线形式
+            //mylineseries.PointGeometry = null;//折线图的无点样式
+            Labels = new List<string> { "", "", "", "", "", "", "", "", "", "" };
+            mylineseries.Values = new ChartValues<int>(temp);
+            myAxisX.Separator.Step = 1;//设置轴间距，0.5时数值1分为两格
+            myAxisY.Separator.Step = 1;
+            SeriesCollection = new SeriesCollection { };
+            SeriesCollection.Add(mylineseries);
+            linestart(null, null);
             DataContext = this;
         }
 
-        public void linestart()
-        {
-            Task.Run(() =>
-            {
-                var r = new Random();
-                while (true)
-                {
-                    Thread.Sleep(1000);
-                    trend = r.Next(-10, 10);
-                    //通过Dispatcher在工作线程中更新窗体的UI元素
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        //更新横坐标时间
-                        Labels.Add(DateTime.Now.ToString());
-                        Labels.RemoveAt(0);
-                        //更新纵坐标数据
-                        SeriesCollection[0].Values.Add(trend);
-                        SeriesCollection[0].Values.RemoveAt(0);
-                    });
-                }
-            });
+        
+        public void linestart(object sender, EventArgs e)
+        {//折线图绘制函数
+            Labels.Add(DateTime.Now.ToString());
+            Labels.RemoveAt(0);
+            SeriesCollection[0].Values.Add(MainBusiness.numberPeople());
+            SeriesCollection[0].Values.RemoveAt(0);
         }
+        
             #endregion
 
         #region -- 按钮功能实现 --

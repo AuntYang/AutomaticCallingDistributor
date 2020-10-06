@@ -58,7 +58,7 @@ namespace 排队机
             {
                 //schoolname = resultMsg.ResultObj.CollegeName;
                //accesstoken = resultMsg.ResultObj.AccessToken;
-                MessageBox.Show("登录成功！，您位于" + accountLoginDTO.Account + "\n即将进入排队系统！", "登录成功");
+                MessageBox.Show("登录成功！，您位于" + ForLogin.UserInfo(accountLoginDTO) + "\n即将进入排队系统！", "登录成功");
                 new MainWindow().Show();
                 this.Close();
             }

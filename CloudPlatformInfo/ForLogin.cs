@@ -24,6 +24,12 @@ namespace CloudPlatformInfo
             }
             return false;
         }
+        public static string UserInfo(AccountLoginDTO accountLoginDTO)
+        {
+            SDK = new NLECloudAPI(TempInfo.API_HOST);
+            var yxh = SDK.UserLogin(accountLoginDTO);
+            return yxh.ResultObj.CollegeName;
+        }
         /*
         public static bool Remeberme(AccountLoginDTO accountLoginDTO)
         {

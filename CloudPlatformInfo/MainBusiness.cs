@@ -5,6 +5,7 @@ using NLECloudSDK;
 using NLECloudSDK.Model;
  
 using System.Windows;
+using System.Numerics;
 
 namespace CloudPlatformInfo
 {
@@ -37,8 +38,21 @@ namespace CloudPlatformInfo
         }
         public static int numberPeople()
         {//当前排队人数
-            var yxh = SDK.GetSensorInfo(119374, "number_up", TempInfo.API_HOST);
-            if(yxh.IsSuccess())
+            var yxh = SDK.GetSensorInfo(119374,"number_up", TempInfo.Token);
+            if(yxh.ResultObj.Value != null)
+            {
+                return int.Parse(yxh.ResultObj.Value.ToString());//注意类型转换
+            }
+            else
+            {
+                return 00;
+            }
+           
+            
+            
+            
+            /*
+            if (yxh.IsSuccess())
             {
                 return (int) yxh.ResultObj.Value;
             }

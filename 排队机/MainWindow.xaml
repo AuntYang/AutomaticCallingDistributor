@@ -8,7 +8,7 @@
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
 
         mc:Ignorable="d"
-        Title="排队机系统" Height="600" Width="800">
+        Title="排队机系统" Height="600" Width="800" Icon="NEKE BOX.png">
     <Grid>
         <Button Content="开始取号" Name="Button_BeganToTake" Click="Button_Click_Began" HorizontalAlignment="Left" Margin="13,43,0,0" VerticalAlignment="Top" Width="264" Height="53" FontSize="20"/>
         <Button Content="暂停取号" Name="Button_StopToTake" Click="Button_Click_Stop" HorizontalAlignment="Left" Margin="277,43,0,0" VerticalAlignment="Top" Width="274" Height="53" FontSize="20"/>
@@ -30,19 +30,20 @@
         <Label Content="排队情况" HorizontalAlignment="Left" Margin="9,202,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="83,219,0,0" Stroke="Black" VerticalAlignment="Top" Width="709"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="-125,355,0,0" VerticalAlignment="Top"/>
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="13,238,242.6,4.4" >
+        <lvc:CartesianChart Name="mychart" Series="{Binding SeriesCollection}" Margin="13,238,242.6,4.4" >
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="人数"
+                <lvc:Axis Title="时间"
                           Labels="{Binding Labels}"
-                          MaxValue="50"
-                          MinValue="0"
+                          Name="myAxisX"
+                          
                           ></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis  Title="时间"
-                           
-                           MaxValue="15"
+                <lvc:Axis  Title="人数"
+                           Name="myAxisY"
+                           MaxValue="10"
                            MinValue="0"
+                           
                           ></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
