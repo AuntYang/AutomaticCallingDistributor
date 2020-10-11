@@ -31,8 +31,10 @@ namespace 排队机
         #region -- 参数设置 --
         //LoginWindow loginWindow = new LoginWindow();
         public SeriesCollection SeriesCollection { get; set; }//存放
-        public List<string> Labels { get; set; }//横坐标,存放图表x轴数据
-        public List<int> NumY { get; set; } = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};//存放图表y轴数据
+        public List<string> Labels { get; set; } = new List<string> { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };//横坐标,存放图表x轴数据
+        public List<int> NumY { get; set; } = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};//存放图表y轴数据
+        public List<string> NumX { get; set; } = new List<string> { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};//存放图表x轴数据
+        //public int[] NumY = new int[9];
         private int[] temp = { 0, 0, 0, 0, 0, 0 ,0 , 0 , 0 , 0 };//横坐标初始值
         //private string[] ExportNum = new string[100];//存放导出的人数
         //private string[] ExportTime =new string[100]; //存放导出的时间
@@ -111,15 +113,18 @@ namespace 排队机
             linestart(null, null);
             DataContext = this;
         }
-
+        
         
         public void linestart(object sender, EventArgs e)
         {//折线图绘制函数
             Labels.Add(DateTime.Now.ToString("HH:mm:s"));
             Labels.RemoveAt(0);
+            NumX.Add(DateTime.Now.ToString("HH:mm:s"));//同步存放需要导出的x轴数据
+            NumX.RemoveAt(0);
             SeriesCollection[0].Values.Add(MainBusiness.numberPeople());
             SeriesCollection[0].Values.RemoveAt(0);
-            NumY.Add(MainBusiness.numberPeople());
+            NumY.Add(MainBusiness.numberPeople());//同步存放需要导出的y轴数据
+            NumY.RemoveAt(0);
         }
         
             #endregion
@@ -156,17 +161,26 @@ namespace 排队机
          // ExportFunction();
             string[] sttime = new string[10];
             int[] stnum = new int[10];
-            sttime = Labels.ToArray();//将List<string> Labels存入string[] st 数组做流输出，存放横坐标的时间数据
+            //sttime = Labels.ToArray();//将List<string> Labels存入string[] st 数组做流输出，存放横坐标的时间数据
+            sttime = NumX.ToArray();
             stnum = NumY.ToArray();
             //MessageBox.Show(st[9], "test");//测试消息框
-
             ExportFunction(sttime, stnum);
 
         }
         private void Button_Click_Import(object sender, RoutedEventArgs e)
         {//导入图表点击事件
-            OutputFunction(Labels.ToArray(),NumY.ToArray());//调用流输入函数对动态图表的xy轴数据存储list进行重写
-            SeriesCollection[0].Values.Add(NumY.ToArray());//因为没找到y轴数据对应的Ilist中存放数据的list，所以自己建立一个同步存放的list进行重写
+            OutputFunction(NumX,NumY);//调用流输入函数对动态图表的xy轴数据存储list进行重写
+            int[] numy = NumY.ToArray();
+            string[] numx = NumX.ToArray();
+            for(int i = 0; i<10;i++)
+            {
+                Labels.Add(numx[i]);
+                Labels.RemoveAt(0);
+                MessageBox.Show(numx[i],"test");
+                SeriesCollection[0].Values.Add(numy[i]);//因为没找到y轴数据对应的Ilist中存放数据的list，所以自己建立一个同步存放的list进行重写
+                SeriesCollection[0].Values.RemoveAt(0);
+            }
         }
         #endregion
 
@@ -177,8 +191,8 @@ namespace 排队机
             //MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "test");//测试消息框
             FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\chartData.txt", FileMode.Create);
             StreamWriter sw = new StreamWriter(fs);
-            sw.Write(argsnum.Length+","+Params);//再写入数据前写入行列信息，2为列数，即参数个数
-            for(int i = 0;i<argsnum.Length;i++)
+            sw.Write(argstime.Length+","+Params);//再写入数据前写入行列信息，2为列数，即参数个数
+            for(int i = 0;i<argstime.Length;i++)
             {//写入参数接受数组的值
                 sw.Write("\n"+argstime[i]+","+argsnum[i]);       
             }
@@ -188,7 +202,7 @@ namespace 排队机
         }
 
 
-        static void OutputFunction(string[] argstime,int[] argsnum )
+        static void OutputFunction(List<string> argstime,List<int> argsnum)
         {//流输入函数
             FileStream file = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\chartData.txt", FileMode.Open);
             StreamReader sw = new StreamReader(file);
@@ -202,8 +216,12 @@ namespace 排队机
             {//通过行列数量信息格式化读取txt文件,外层嵌套读取行
                 string TemporaryLine = sw.ReadLine();//暂时存放列读取的数据，等待下一步分割
                 string[] TemporaryArray = TemporaryLine.Split(',');//对上一步暂存的数据进行分割，分隔符：，
-                argstime[i] = TemporaryArray[0];//将逻辑第一列存入
-                argsnum[i] = int.Parse(TemporaryArray[1]);//将逻辑第二行进行类型转换后存入
+                argstime.Add(TemporaryArray[0]);//将逻辑第一列存入
+                //MessageBox.Show(TemporaryArray[0],"test");
+                argsnum.Add(int.Parse(TemporaryArray[1]));//将逻辑第二行进行类型转换后存入
+                
+                //argstime[i] = TemporaryArray[0];//将逻辑第一列存入
+                //argsnum[i] = int.Parse(TemporaryArray[1]);//将逻辑第二行进行类型转换后存入
 
                 /*
                  * 读取二维数组时使用
